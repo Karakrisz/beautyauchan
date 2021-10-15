@@ -12,8 +12,8 @@ $(".contact_btn").on('click', function () {
 
     var str = $('#contact-form-data').serializeArray();
 
-    $('#contact-form-data input').each(function() {
-        if(!$(this).val()){
+    $('#contact-form-data input').each(function () {
+        if (!$(this).val()) {
             // alert('Some fields are empty');
             proceed = "false";
         }
@@ -26,10 +26,10 @@ $(".contact_btn").on('click', function () {
         var secondLevelLocation = pathArray[3];
 
         var accessURL;
-        if(secondLevelLocation){
-            accessURL="../vendor/contact-mailer.php";
-        }else{
-            accessURL="vendor/contact-mailer.php";
+        if (secondLevelLocation) {
+            accessURL = "../vendor/contact-mailer.php";
+        } else {
+            accessURL = "vendor/contact-mailer.php";
         }
         //data to be sent to server
         $.ajax({
@@ -52,21 +52,21 @@ $(".contact_btn").on('click', function () {
                     // alert("yes");
                     $("#result").hide().html(output).slideDown();
                     $(".contact_btn i").addClass('d-none');
-                }else{
+                } else {
                     if (response.type == 'error') {
                         Swal.fire({
                             type: 'error',
                             icon: 'error',
                             title: 'Oops...',
-                            html: '<div class="text-danger">'+ response.text +'</div>',
+                            html: '<div class="text-danger">' + response.text + '</div>',
                         })
                         $(".contact_btn i").addClass('d-none');
-                    }else{
+                    } else {
                         Swal.fire({
                             type: 'success',
                             icon: 'success',
                             title: 'Success!',
-                            html: '<div class="text-success">'+ response.text +'</div>',
+                            html: '<div class="text-success">' + response.text + '</div>',
                         })
                         $(".contact_btn i").addClass('d-none');
                     }
@@ -77,15 +77,13 @@ $(".contact_btn").on('click', function () {
             }
         });
 
-    }
-    else
-    {
+    } else {
         if ($("#result").length) {
             // alert("yes");
             output = '<div class="alert-danger" style="padding:10px 15px; margin-bottom:30px;">Please provide the missing fields.</div>';
             $("#result").hide().html(output).slideDown();
             $(".contact_btn i").addClass('d-none');
-        }else{
+        } else {
             Swal.fire({
                 icon: 'error',
                 type: 'error',
@@ -114,10 +112,10 @@ $(".modal_contact_btn").on('click', function () {
     var post_data, output;
     var proceed = "true";
 
-    var str=$('#modal-contact-form-data').serializeArray();
+    var str = $('#modal-contact-form-data').serializeArray();
 
-    $('#modal-contact-form-data input').each(function() {
-        if(!$(this).val()){
+    $('#modal-contact-form-data input').each(function () {
+        if (!$(this).val()) {
             proceed = "false";
         }
     });
@@ -128,19 +126,19 @@ $(".modal_contact_btn").on('click', function () {
         var secondLevelLocation = pathArray[3];
 
         var accessURL;
-        if(secondLevelLocation){
-            accessURL="../vendor/contact-mailer.php";
-        }else{
-            accessURL="vendor/contact-mailer.php";
+        if (secondLevelLocation) {
+            accessURL = "../vendor/contact-mailer.php";
+        } else {
+            accessURL = "vendor/contact-mailer.php";
         }
         //data to be sent to server
         $.ajax({
-            type : 'POST',
+            type: 'POST',
             // url : 'vendor/contact-mailer.php',
-            url : accessURL,
-            data : str,
+            url: accessURL,
+            data: str,
             dataType: 'json',
-            success: function(response) {
+            success: function (response) {
                 if (response.type == 'error') {
                     output = '<div class="alert-danger" style="padding:10px 15px; margin-bottom:30px;">' + response.text + '</div>';
                 } else {
@@ -154,21 +152,21 @@ $(".modal_contact_btn").on('click', function () {
                 if ($("#quote_result").length) {
                     $("#quote_result").hide().html(output).slideDown();
                     $(".modal_contact_btn i").addClass('d-none');
-                }else{
+                } else {
                     if (response.type == 'error') {
                         Swal.fire({
                             type: 'error',
                             icon: 'error',
                             title: 'Oops...',
-                            html: '<div class="text-danger">'+ response.text +'</div>',
+                            html: '<div class="text-danger">' + response.text + '</div>',
                         })
                         $(".modal_contact_btn i").addClass('d-none');
-                    }else{
+                    } else {
                         Swal.fire({
                             type: 'success',
                             icon: 'success',
                             title: 'Success!',
-                            html: '<div class="text-success">'+ response.text +'</div>',
+                            html: '<div class="text-success">' + response.text + '</div>',
                         })
                         $(".modal_contact_btn i").addClass('d-none');
                     }
@@ -181,8 +179,7 @@ $(".modal_contact_btn").on('click', function () {
             }
         });
 
-    }
-    else {
+    } else {
         // output = '<div class="alert-danger" style="padding:10px 15px; margin-bottom:30px;">Please provide the missing fields.</div>';
         // $("#quote_result").hide().html(output).slideDown();
         // $(".modal_contact_btn i").addClass('d-none');
@@ -191,7 +188,7 @@ $(".modal_contact_btn").on('click', function () {
             output = '<div class="alert-danger" style="padding:10px 15px; margin-bottom:30px;">Please provide the missing fields.</div>';
             $("#quote_result").hide().html(output).slideDown();
             $(".modal_contact_btn i").addClass('d-none');
-        }else{
+        } else {
             Swal.fire({
                 icon: 'error',
                 type: 'error',

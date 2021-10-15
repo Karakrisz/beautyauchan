@@ -23,6 +23,7 @@
     <!-- Style Sheet -->
     <link rel="stylesheet" href="vendor/css/LineIcons.min.css">
     <link rel="stylesheet" href="portfolio-agency/css/style.css">
+    <link rel="stylesheet" href="/karaKrisz/css/style.css">
 </head>
 
 <body data-spy="scroll" data-target=".side-nav-menu" data-offset="400">

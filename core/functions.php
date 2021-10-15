@@ -1,5 +1,6 @@
 <?php
 
+/******************** logs function content start **********************/
 
 function logMessage($level, $message)
 {
@@ -8,11 +9,15 @@ function logMessage($level, $message)
     fclose($file);
 }
 
+/******************** errors function content start **********************/
+
 function errorPage()
 {
     include "tamplates/error.php";
     die();
 }
+
+/******************** routes function content start **********************/
 
 $routes = [];
 
@@ -37,11 +42,14 @@ function dispatch($action, $notFound)
     return $notFound();
 }
 
+/******************** html function content start **********************/
 
 function esc($string)
 {
     echo htmlspecialchars($string);
 }
+
+/******************** connection function content start **********************/
 
 function getConnection()
 {
@@ -52,4 +60,59 @@ function getConnection()
         errorPage();
     }
     return $connection;
+}
+
+/******************** home function content start **********************/
+
+function promotions($connection)
+{
+    if ($statement = mysqli_prepare($connection, 'SELECT * from promotions ORDER BY id DESC limit 1')) {
+        mysqli_stmt_execute($statement);
+        $result = mysqli_stmt_get_result($statement);
+        return mysqli_fetch_all($result, MYSQLI_ASSOC);
+    } else {
+        logMessage('ERROR', 'Query error: ' . mysqli_error($connection));
+        errorPage();
+    }
+}
+
+function about_us($connection)
+{
+    if ($statement = mysqli_prepare($connection, 'SELECT * from about_us ORDER BY id DESC limit 3')) {
+        mysqli_stmt_execute($statement);
+        $result = mysqli_stmt_get_result($statement);
+        return mysqli_fetch_all($result, MYSQLI_ASSOC);
+    } else {
+        logMessage('ERROR', 'Query error: ' . mysqli_error($connection));
+        errorPage();
+    }
+}
+
+/******************** promotions function content start **********************/
+
+function promotionsInsert($connection, $promotions_name, $promotions_comment)
+{
+    if ($statement = mysqli_prepare($connection, 'INSERT INTO promotions (promotions_name, promotions_comment) VALUES (?,?)')) {
+        mysqli_stmt_bind_param($statement, 'ss', $promotions_name, $promotions_comment);
+        mysqli_stmt_execute($statement);
+        mysqli_stmt_close($statement);
+    } else {
+        logMessage('ERROR', 'Query error:' . mysqli_error($connection));
+        errorPage();
+    }
+}
+
+
+/******************** about_name function content start **********************/
+
+function aboutInsert($connection, $about_name)
+{
+    if ($statement = mysqli_prepare($connection, 'INSERT INTO about_us (about_name) VALUES (?)')) {
+        mysqli_stmt_bind_param($statement, 's', $about_name);
+        mysqli_stmt_execute($statement);
+        mysqli_stmt_close($statement);
+    } else {
+        logMessage('ERROR', 'Query error:' . mysqli_error($connection));
+        errorPage();
+    }
 }

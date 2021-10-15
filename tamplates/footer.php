@@ -8,3 +8,6 @@
 <!-- custom script -->
 <script src="vendor/js/contact_us.js"></script>
 <script src="portfolio-agency/js/script.js"></script>
+
+<!-- karaKrisz script -->
+<script src="karaKrisz/js/app.js"></script>
